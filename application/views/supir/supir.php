@@ -42,16 +42,15 @@
                                 </thead>
                                 <tbody>
                                 <?php 
-var_dump($daftarSupir);exit;
                                 foreach($daftarSupir->result() as $data): ?>
                                     <tr>
-                                        <td>1</td>
-                                        <td><?= $data->nama_supir ?></td>
+                                        <td><?= $data->no_induk ?></td>
+                                        <td><?= $data->nama_lengkap ?></td>
                                         <td><?= $data->tempat_lahir ?></td>
-                                        <td><?= $data->tanggal_lahir ?></td>
-                                        <td><?= $data->alamat ?></td>
+                                        <td><?= $data->tgl_lahir ?></td>
+                                        <td><?= $data->alamat_sekarang ?></td>
                                         <td><?= $data->mulai_kerja ?></td>
-                                        <td><a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_supir('<?= $data->id_supir ?>')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                                        <td><a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_supir('<?= $data->no_induk ?>')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
