@@ -26,7 +26,6 @@
                         <div class="panel-body">
                             <p class="demo-button">
                                 <button type="button" onclick="buka_modal()" class="btn btn-primary">Tambah</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
                             </p>
                             <table class="table table-bordered" id="dataSupir">
                                 <thead>
@@ -51,6 +50,7 @@
                                         <td><?= $data->alamat_sekarang ?></td>
                                         <td><?= $data->mulai_kerja ?></td>
                                         <td><a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_supir('<?= $data->no_induk ?>')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                                        <a class="btn btn-sm btn-danger hapusSupir" data-id="<?= $data->no_induk ?>" href="#" title="Edit"> <i class="glyphicon glyphicon-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -80,9 +80,10 @@
         <h4 class="modal-title" id="myModalLabel">Tambah Supir</h4>
       </div>
       <div class="modal-body">
-      <?php echo form_open('supir/proses', ['id' => 'formSupir']);?>
-        <!-- <form id="formSupir" method="POST" > -->
-        <div class="input-group">
+      <!-- <?php echo form_open('supir/proses', ['id' => 'formSupir']);?> -->
+        <form id="formSupir">
+          <div class="alert alert-danger print-error-msg" style="display:none"></div>
+        <div class="input-group hidden">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input name="no_induk" class="form-control" placeholder="No Induk" type="text">
         </div>
@@ -179,6 +180,29 @@ $(document).ready(function() {
     });
     
 });
+
+$('.hapusSupir').on('click', function(e){
+  var r=confirm("Apakah Anda yakin ingin menghapus data ini?")
+  if (r==true) {
+    $.ajax({
+          url : "<?php echo site_url('SupirController/hapusSupir')?>",
+          type: "POST",
+          data: {"no_induk": $(this).data('id')},
+          dataType: "JSON",
+          success: function(data)
+          {
+              alert(data.success);
+              location.reload()
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert(data.gagal);
+          }
+      });
+  } else {
+    return false;
+  }
+});
 var save_method;
 function buka_modal()
 {
@@ -187,37 +211,52 @@ function buka_modal()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#myModal').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Tambah Supir'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Tambah Data Supir'); // Set Title to Bootstrap modal title
 }
 
 function edit_supir(id)
 {
-    save_method = 'update';
-    $('#form')[0].reset(); // reset form on modals
+    // save_method = 'update';
+    console.log(id)
+    // $('#formSupir')[0].reset(); // reset form on modals
+    // $('.form-group').removeClass('has-error'); // clear error class
+    // $('.help-block').empty(); // clear error string
+    save_method = 'ubah';
+    $('#formSupir')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
+    $('#myModal').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Ubah Data Supir'); // Set Title to Bootstrap modal title
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "<?php echo site_url('person/ajax_edit/')?>/" + id,
-        type: "GET",
+        url : "<?php echo site_url('SupirController/getSupirById')?>",
+        type: "POST",
+        data: {"id": id},
         dataType: "JSON",
         success: function(data)
         {
-
-            $('[name="id"]').val(data.id);
-            $('[name="firstName"]').val(data.firstName);
-            $('[name="lastName"]').val(data.lastName);
-            $('[name="gender"]').val(data.gender);
-            $('[name="address"]').val(data.address);
-            $('[name="dob"]').datepicker('update',data.dob);
-            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+          console.log(data, data[0]['no_induk'])
+            $('[name="no_induk"]').val(data[0]['no_induk']);
+            $('[name="no_ktp"]').val(data[0]['no_ktp']);
+            $('[name="nama_lengkap"]').val(data[0]['nama_lengkap']);
+            $('[name="provinsi"]').val(data[0]['Provinsi']);
+            $('[name="kabupaten_kota"]').val(data[0]['kabupaten_kota']);
+            $('[name="no_telephone"]').val(data[0]['no_telp']);
+            $('[name="tanggal_lahir"]').val(data[0]['tgl_lahir']);
+            $('[name="tempat_lahir"]').val(data[0]['tempat_lahir']);
+            $('[name="mulai_kerja"]').val(data[0]['mulai_kerja']);
+            $('[name="status_perkawinan"]').val(data[0]['status_perkawinan']);
+            $('[name="alamat_sekarang"]').val(data[0]['alamat_sekarang']);
+            $("input[value='" + data[0]['jenis_kelamin'] + "']").prop('checked', true);
+            // $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            // $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-            alert('Error get data from ajax');
+            // alert('Error get data from ajax');
+            console.log(data);
         }
     });
 }
@@ -236,7 +275,7 @@ function save()
     if(save_method == 'tambah') {
         url = "<?php echo site_url('SupirController/tambahSupir')?>";
     } else {
-        url = "<?php echo site_url('person/ajax_update')?>";
+        url = "<?php echo site_url('SupirController/ubahSupir')?>";
     }
 
     // ajax adding data to database
@@ -247,18 +286,21 @@ function save()
         dataType: "JSON",
         success: function(data)
         {
-            if(data.status === 'ok') //if success close modal and reload ajax table
-            {
-                $('#myModal').modal('hide');
-                //reload_table();
+
+            if($.isEmptyObject(data.error)){
+              $(".print-error-msg").css('display','none');
+              alert(data.success);
+              $('#myModal').modal('hide');
+                // reload_table();
                 location.reload()
-                
+            }else{
+              $(".print-error-msg").css('display','block');
+              $(".print-error-msg").html(data.error);
+              $("#myModal, html, body").animate({ scrollTop: 0 }, 600);
             }
 
             $('#btnSave').text('Save changes'); //change button text
             $('#btnSave').attr('disabled',false); //set button enable 
-
-
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -269,9 +311,6 @@ function save()
         }
     });
 }
-
-
-
 
 </script>	
 </body>
