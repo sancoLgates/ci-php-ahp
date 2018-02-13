@@ -49,9 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'localhost/index.php/supir';
+$route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['home']='HomeController/index';
 $route['supir']='SupirController/index';
+// $route['login']='PenggunaController/login_pengguna';
+// $route['daftar']='PenggunaController/daftar_pengguna';
+// $route['register']='PenggunaController/register_pengguna';
 $route['data-supir']='SupirController/dataSupir';

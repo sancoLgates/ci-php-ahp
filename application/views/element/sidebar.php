@@ -3,8 +3,8 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="<?php echo base_url('index.php/HomeController')?>" class=""><i class="lnr lnr-home"></i> <span>Beranda</span></a></li>
-						<li><a href="<?php echo base_url('index.php/supir')?>" class=""><i class="lnr lnr-database"></i> <span>Data Supir</span></a></li>
+						<li><a href="<?php echo base_url('home')?>" class=""><i class="lnr lnr-home"></i> <span>Beranda</span></a></li>
+						<li><a href="<?php echo base_url('supir')?>" class=""><i class="lnr lnr-database"></i> <span>Data Supir</span></a></li>
 						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Bobot Kriteria</span></a></li>
 						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
 						<li><a href="notifications.html" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>

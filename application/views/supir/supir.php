@@ -80,7 +80,8 @@
         <h4 class="modal-title" id="myModalLabel">Tambah Supir</h4>
       </div>
       <div class="modal-body">
-        <form id="formSupir">
+      <?php echo form_open('supir/proses', ['id' => 'formSupir']);?>
+        <!-- <form id="formSupir" method="POST" > -->
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input name="no_induk" class="form-control" placeholder="No Induk" type="text">
