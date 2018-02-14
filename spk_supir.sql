@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2018 at 05:41 PM
+-- Generation Time: Feb 14, 2018 at 10:21 AM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -43,7 +43,8 @@ INSERT INTO `akun` (`id`, `nama`, `email`, `password`) VALUES
 (9, 'SEO SATU', 'admin3@admin.com', '$2y$10$XiFJdRbGvtg73yBQZ1m9.ea1KtTS5OMSIs5EFdXjuEL47a67PriMW'),
 (10, 'ee', 'root@sadasd.com', '$2y$10$V0/C5fQo4Y9QCVjqIWUW8.W6Mlw9FlJvZD1fVsCCAEcoWc5hH85fK'),
 (11, 'sanz', 'sancolgates1@gmail.com', '$2y$10$a1PXPuG8TzGp2QpSm33hee190Qv.jdqyOjNOn2N2YIGClGQeYrSFi'),
-(12, '123123', 'sancolgate123123s1@gmail.com', '$2y$10$sNmKZ3kLXPy77VocwqxijuSteMoHF0fU2GcfuHTdxdSVKCbjb86PS');
+(12, '123123', 'sancolgate123123s1@gmail.com', '$2y$10$sNmKZ3kLXPy77VocwqxijuSteMoHF0fU2GcfuHTdxdSVKCbjb86PS'),
+(13, 'superadmin', 'superadmin@gmail.com', '$2y$10$FxPxTU3DdvpQ3w3jz3RH/OkNbr0eW239aZhbuT7T8JqPT2ohE6T86');
 
 -- --------------------------------------------------------
 
@@ -221,7 +222,7 @@ ALTER TABLE `supir`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `master_kriteria`
 --
@@ -231,7 +232,7 @@ ALTER TABLE `master_kriteria`
 -- AUTO_INCREMENT for table `supir`
 --
 ALTER TABLE `supir`
-  MODIFY `no_induk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `no_induk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
