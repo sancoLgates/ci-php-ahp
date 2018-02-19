@@ -21,7 +21,7 @@
                     <!-- BORDERED TABLE -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Bordered Table</h3>
+                            <h3 class="panel-title">Data Supir</h3>
                         </div>
                         <div class="panel-body">
                             <p class="demo-button">
